@@ -101,6 +101,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   const ProImageEditor._({
     super.key,
     required this.callbacks,
+    this.appBarWidgetCrop,
     this.byteArray,
     this.assetPath,
     this.networkUrl,
@@ -145,11 +146,13 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Uint8List byteArray, {
     Key? key,
     required ProImageEditorCallbacks callbacks,
+    Widget? appBarWidgetCrop,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
   }) {
     return ProImageEditor._(
       key: key,
       byteArray: byteArray,
+      appBarWidgetCrop: appBarWidgetCrop,
       configs: configs,
       callbacks: callbacks,
     );
@@ -175,11 +178,13 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     String? imageBack,
+     Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
       file: file,
       configs: configs,
+      appBarWidgetCrop: appBarWidgetCrop,
       imageBack: imageBack,
       callbacks: callbacks,
     );
@@ -204,10 +209,12 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
+     Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
       assetPath: assetPath,
+      appBarWidgetCrop: appBarWidgetCrop,
       configs: configs,
       callbacks: callbacks,
     );
@@ -233,10 +240,12 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
+    Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
       networkUrl: networkUrl,
+      appBarWidgetCrop: appBarWidgetCrop,
       configs: configs,
       callbacks: callbacks,
     );
@@ -260,6 +269,8 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   final File? file;
 
   final String? imageBack;
+
+  final Widget? appBarWidgetCrop;
 
   @override
   State<ProImageEditor> createState() => ProImageEditorState();
@@ -1203,9 +1214,18 @@ class ProImageEditorState extends State<ProImageEditor>
       CropRotateEditor.autoSource(
         key: cropRotateEditor,
         file: editorImage.file,
+        appBarWidget: widget.appBarWidgetCrop,
         byteArray: editorImage.byteArray,
         assetPath: editorImage.assetPath,
         networkUrl: editorImage.networkUrl,
+        backImage: widget.imageBack == null
+            ? null
+            : Image.asset(
+                widget.imageBack!,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.cover,
+              ),
         initConfigs: CropRotateEditorInitConfigs(
           configs: configs,
           callbacks: callbacks,
