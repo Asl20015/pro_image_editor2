@@ -1892,7 +1892,7 @@ class CropRotateEditorState extends State<CropRotateEditor>
                   SafeArea(
                     child: Scaffold(
                       resizeToAvoidBottomInset: false,
-                      backgroundColor: imageEditorTheme.cropRotateEditor.background,
+                      backgroundColor: Colors.transparent,
                       appBar: _buildAppBar(constraints),
                       body: _buildBody(),
                       bottomNavigationBar: _buildBottomAppBar(),
@@ -1922,7 +1922,7 @@ class CropRotateEditorState extends State<CropRotateEditor>
       backgroundColor: Colors.transparent,
       foregroundColor: imageEditorTheme.cropRotateEditor.appBarForegroundColor,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
+        preferredSize: const Size.fromHeight(44),
         child: Padding(
           padding: const EdgeInsets.only(top: 16),
           child: Center(
