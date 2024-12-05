@@ -1946,7 +1946,7 @@ class ProImageEditorState extends State<ProImageEditor>
                     child: LayoutBuilder(builder: (context, constraints) {
                       sizesManager.editorSize = constraints.biggest;
                       return Scaffold(
-                        backgroundColor: Colors.yellow,
+                        backgroundColor: Colors.transparent,
                         resizeToAvoidBottomInset: false,
                         appBar: _buildAppBar(),
                         body: _buildBody(),
