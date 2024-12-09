@@ -28,7 +28,7 @@ class IconsTextEditor {
   /// )
   /// ```
   const IconsTextEditor({
-    this.bottomNavBar = Icons.title_rounded,
+    this.bottomNavBar,
     this.alignLeft = Icons.align_horizontal_left_rounded,
     this.alignCenter = Icons.align_horizontal_center_rounded,
     this.alignRight = Icons.align_horizontal_right_rounded,
@@ -38,7 +38,7 @@ class IconsTextEditor {
   });
 
   /// The icon to be displayed in the bottom navigation bar.
-  final IconData bottomNavBar;
+  final Widget? bottomNavBar;
 
   /// The icon for aligning text to the left.
   final IconData alignLeft;
@@ -65,7 +65,7 @@ class IconsTextEditor {
   /// [IconsTextEditor] with some properties updated while keeping the
   /// others unchanged.
   IconsTextEditor copyWith({
-    IconData? bottomNavBar,
+    Widget? bottomNavBar,
     IconData? alignLeft,
     IconData? alignCenter,
     IconData? alignRight,

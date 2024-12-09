@@ -274,7 +274,7 @@ class _HighlyConfigurableExampleState extends State<HighlyConfigurableExample>
             dashLine: Icons.power_input,
           ),
           textEditor: IconsTextEditor(
-            bottomNavBar: Icons.title,
+            bottomNavBar: Icon(Icons.title),
             alignLeft: Icons.align_horizontal_left_rounded,
             alignCenter: Icons.align_horizontal_center_rounded,
             alignRight: Icons.align_horizontal_right_rounded,
@@ -290,7 +290,7 @@ class _HighlyConfigurableExampleState extends State<HighlyConfigurableExample>
             reset: Icons.reset_tv,
           ),
           filterEditor: IconsFilterEditor(
-            bottomNavBar: Icons.tungsten,
+            bottomNavBar: Icon(Icons.tungsten),
           ),
           tuneEditor: IconsTuneEditor(
             bottomNavBar: Icons.filter_b_and_w_outlined,

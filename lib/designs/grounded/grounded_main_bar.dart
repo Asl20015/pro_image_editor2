@@ -178,8 +178,8 @@ class GroundedMainBarState extends State<GroundedMainBar>
                             spacing: 7,
                             label: Text(i18n.textEditor.bottomNavigationBarText,
                                 style: _bottomTextStyle),
-                            icon: Icon(
-                              icons.textEditor.bottomNavBar,
+                            icon: icons.textEditor.bottomNavBar ?? Icon(
+                              Icons.title,
                               size: _bottomIconSize,
                               color: _foreGroundColor,
                             ),
@@ -216,8 +216,8 @@ class GroundedMainBarState extends State<GroundedMainBar>
                             label: Text(
                                 i18n.filterEditor.bottomNavigationBarText,
                                 style: _bottomTextStyle),
-                            icon: Icon(
-                              icons.filterEditor.bottomNavBar,
+                            icon: icons.filterEditor.bottomNavBar ?? Icon(
+                              Icons.filter,
                               size: _bottomIconSize,
                               color: _foreGroundColor,
                             ),

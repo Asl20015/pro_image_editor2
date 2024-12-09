@@ -152,7 +152,8 @@ class _FrostedGlassActionBarState extends State<FrostedGlassActionBar> {
                           onPressed: () => widget.editor.openTextEditor(
                             duration: const Duration(milliseconds: 150),
                           ),
-                          icon: Icon(widget.editor.configs.icons.textEditor.bottomNavBar),
+                          icon: widget.editor.configs.icons.textEditor.bottomNavBar ??
+                              Icon(Icons.title),
                         ),
                       if (widget.editor.configs.cropRotateEditorConfigs.enabled)
                         GestureDetector(
@@ -170,7 +171,8 @@ class _FrostedGlassActionBarState extends State<FrostedGlassActionBar> {
                         IconButton(
                           tooltip: widget.editor.configs.i18n.filterEditor.bottomNavigationBarText,
                           onPressed: widget.editor.openFilterEditor,
-                          icon: Icon(widget.editor.configs.icons.filterEditor.bottomNavBar),
+                          icon: widget.editor.configs.icons.filterEditor.bottomNavBar ??
+                              Icon(Icons.filter),
                         ),
                       if (widget.editor.configs.blurEditorConfigs.enabled)
                         IconButton(

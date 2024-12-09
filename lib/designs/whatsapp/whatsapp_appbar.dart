@@ -113,11 +113,9 @@ class _WhatsAppAppBarState extends State<WhatsAppAppBar> {
                   ],
                   if (widget.configs.textEditorConfigs.enabled) ...[
                     gap,
-                    IconButton(
-                      tooltip: widget.configs.i18n.textEditor.bottomNavigationBarText,
-                      onPressed: widget.onTapTextEditor,
-                      icon: Icon(widget.configs.icons.textEditor.bottomNavBar),
-                      style: whatsAppButtonStyle,
+                    GestureDetector(
+                      onTap:  widget.onTapTextEditor,
+                      child: widget.configs.icons.textEditor.bottomNavBar ?? Icon(Icons.title),
                     ),
                   ],
                   if (widget.configs.paintEditorConfigs.enabled) ...[

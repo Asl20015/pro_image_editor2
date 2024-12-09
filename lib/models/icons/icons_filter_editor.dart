@@ -19,11 +19,11 @@ class IconsFilterEditor {
   /// )
   /// ```
   const IconsFilterEditor({
-    this.bottomNavBar = Icons.filter,
+    this.bottomNavBar,
   });
 
   /// The icon to be displayed in the bottom navigation bar.
-  final IconData bottomNavBar;
+  final Widget? bottomNavBar;
 
   /// Creates a copy of this `IconsFilterEditor` object with the given fields
   /// replaced with new values.
@@ -32,7 +32,7 @@ class IconsFilterEditor {
   /// [IconsFilterEditor] with some properties updated while keeping the
   /// others unchanged.
   IconsFilterEditor copyWith({
-    IconData? bottomNavBar,
+    Widget? bottomNavBar,
   }) {
     return IconsFilterEditor(
       bottomNavBar: bottomNavBar ?? this.bottomNavBar,

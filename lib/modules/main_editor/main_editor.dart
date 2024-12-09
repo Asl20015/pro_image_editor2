@@ -103,8 +103,10 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     required this.callbacks,
     this.appBarWidgetCrop,
     this.byteArray,
+    this.bottomTextStyle,
     this.assetPath,
     this.networkUrl,
+    required this.bottomNavigationBarHeight,
     this.file,
     this.imageBack,
     this.configs = const ProImageEditorConfigs(),
@@ -147,11 +149,15 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
+    TextStyle? bottomTextStyle,
+    double bottomNavigationBarHeight = 56,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
   }) {
     return ProImageEditor._(
       key: key,
       byteArray: byteArray,
+      bottomTextStyle: bottomTextStyle,
+      bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
       configs: configs,
       callbacks: callbacks,
@@ -175,17 +181,21 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   factory ProImageEditor.file(
     File file, {
     Key? key,
+    TextStyle? bottomTextStyle,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     String? imageBack,
+    double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
       file: file,
+      bottomNavigationBarHeight: bottomNavigationBarHeight,
       configs: configs,
       appBarWidgetCrop: appBarWidgetCrop,
       imageBack: imageBack,
+      bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
     );
   }
@@ -207,15 +217,19 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   factory ProImageEditor.asset(
     String assetPath, {
     Key? key,
+    TextStyle? bottomTextStyle,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
+    double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
+      bottomNavigationBarHeight: bottomNavigationBarHeight,
       assetPath: assetPath,
       appBarWidgetCrop: appBarWidgetCrop,
       configs: configs,
+      bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
     );
   }
@@ -238,15 +252,19 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   factory ProImageEditor.network(
     String networkUrl, {
     Key? key,
+    TextStyle? bottomTextStyle,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
+    double bottomNavigationBarHeight = 56,
   }) {
     return ProImageEditor._(
       key: key,
       networkUrl: networkUrl,
+      bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
       configs: configs,
+      bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
     );
   }
@@ -269,6 +287,9 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   final File? file;
 
   final String? imageBack;
+
+  final double bottomNavigationBarHeight;
+  final TextStyle? bottomTextStyle;
 
   final Widget? appBarWidgetCrop;
 
@@ -2184,7 +2205,7 @@ class ProImageEditorState extends State<ProImageEditor>
                 scrollbarOrientation: ScrollbarOrientation.top,
                 thickness: isDesktop ? null : 0,
                 child: BottomAppBar(
-                  height: kBottomNavigationBarHeight,
+                  height: widget.bottomNavigationBarHeight,
                   color: Colors.transparent,
                   padding: EdgeInsets.zero,
                   child: Center(
@@ -2206,6 +2227,51 @@ class ProImageEditorState extends State<ProImageEditor>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
+                              if (cropRotateEditorConfigs.enabled)
+                                FlatIconTextButton(
+                                  key: const ValueKey('open-crop-rotate-editor-btn'),
+                                  label: Text(
+                                    'Cut',
+                                    style: widget.bottomTextStyle ?? bottomTextStyle,
+                                  ),
+                                  icon: icons.cropRotateEditor.bottomNavBar ??
+                                      Icon(
+                                        Icons.crop,
+                                        size: bottomIconSize,
+                                        color: Colors.white,
+                                      ),
+                                  onPressed: openCropRotateEditor,
+                                ),
+                              if (filterEditorConfigs.enabled)
+                                FlatIconTextButton(
+                                  key: const ValueKey('open-filter-editor-btn'),
+                                  label: Text(
+                                    'Filters',
+                                    style: widget.bottomTextStyle ?? bottomTextStyle,
+                                  ),
+                                  icon: icons.filterEditor.bottomNavBar ??
+                                      Icon(
+                                        Icons.filter,
+                                        size: bottomIconSize,
+                                        color: Colors.white,
+                                      ),
+                                  onPressed: openFilterEditor,
+                                ),
+                              if (textEditorConfigs.enabled)
+                                FlatIconTextButton(
+                                  key: const ValueKey('open-text-editor-btn'),
+                                  label: Text(
+                                    'Text',
+                                    style: widget.bottomTextStyle ?? bottomTextStyle,
+                                  ),
+                                  icon: icons.textEditor.bottomNavBar ??
+                                      Icon(
+                                        Icons.text_format,
+                                        size: bottomIconSize,
+                                        color: Colors.white,
+                                      ),
+                                  onPressed: openTextEditor,
+                                ),
                               if (paintEditorConfigs.enabled)
                                 FlatIconTextButton(
                                   key: const ValueKey('open-painting-editor-btn'),
@@ -2218,31 +2284,6 @@ class ProImageEditorState extends State<ProImageEditor>
                                   ),
                                   onPressed: openPaintingEditor,
                                 ),
-                              if (textEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  key: const ValueKey('open-text-editor-btn'),
-                                  label: Text(i18n.textEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.textEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: openTextEditor,
-                                ),
-                              if (cropRotateEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  key: const ValueKey('open-crop-rotate-editor-btn'),
-                                  label: Text(i18n.cropRotateEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: icons.cropRotateEditor.bottomNavBar ??
-                                      Icon(
-                                        Icons.crop,
-                                        size: bottomIconSize,
-                                        color: Colors.white,
-                                      ),
-                                  onPressed: openCropRotateEditor,
-                                ),
                               if (tuneEditorConfigs.enabled)
                                 FlatIconTextButton(
                                   key: const ValueKey('open-tune-editor-btn'),
@@ -2254,18 +2295,6 @@ class ProImageEditorState extends State<ProImageEditor>
                                     color: Colors.white,
                                   ),
                                   onPressed: openTuneEditor,
-                                ),
-                              if (filterEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  key: const ValueKey('open-filter-editor-btn'),
-                                  label: Text(i18n.filterEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.filterEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: openFilterEditor,
                                 ),
                               if (blurEditorConfigs.enabled)
                                 FlatIconTextButton(
