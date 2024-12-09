@@ -178,7 +178,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     String? imageBack,
-     Widget? appBarWidgetCrop,
+    Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
@@ -209,7 +209,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
-     Widget? appBarWidgetCrop,
+    Widget? appBarWidgetCrop,
   }) {
     return ProImageEditor._(
       key: key,
@@ -2235,11 +2235,12 @@ class ProImageEditorState extends State<ProImageEditor>
                                   key: const ValueKey('open-crop-rotate-editor-btn'),
                                   label: Text(i18n.cropRotateEditor.bottomNavigationBarText,
                                       style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.cropRotateEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
+                                  icon: icons.cropRotateEditor.bottomNavBar ??
+                                      Icon(
+                                        Icons.crop,
+                                        size: bottomIconSize,
+                                        color: Colors.white,
+                                      ),
                                   onPressed: openCropRotateEditor,
                                 ),
                               if (tuneEditorConfigs.enabled)

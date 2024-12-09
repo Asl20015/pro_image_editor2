@@ -23,7 +23,7 @@ class IconsCropRotateEditor {
   /// )
   /// ```
   const IconsCropRotateEditor({
-    this.bottomNavBar = Icons.crop_rotate_rounded,
+    this.bottomNavBar,
     this.rotate = Icons.rotate_90_degrees_ccw_outlined,
     this.aspectRatio = Icons.crop,
     this.flip = Icons.flip,
@@ -31,7 +31,7 @@ class IconsCropRotateEditor {
   });
 
   /// The icon to be displayed in the bottom navigation bar.
-  final IconData bottomNavBar;
+  final Widget? bottomNavBar;
 
   /// The icon for the rotate action.
   final IconData rotate;
@@ -52,7 +52,7 @@ class IconsCropRotateEditor {
   /// [IconsCropRotateEditor] with some properties updated while keeping the
   /// others unchanged.
   IconsCropRotateEditor copyWith({
-    IconData? bottomNavBar,
+    Widget? bottomNavBar,
     IconData? rotate,
     IconData? aspectRatio,
     IconData? flip,

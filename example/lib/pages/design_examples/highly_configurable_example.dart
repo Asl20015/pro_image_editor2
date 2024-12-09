@@ -283,7 +283,7 @@ class _HighlyConfigurableExampleState extends State<HighlyConfigurableExample>
             resetFontScale: Icons.restore,
           ),
           cropRotateEditor: IconsCropRotateEditor(
-            bottomNavBar: Icons.crop_free_rounded,
+            bottomNavBar: Icon(Icons.crop_free_rounded),
             rotate: Icons.rotate_left,
             aspectRatio: Icons.crop,
             flip: Icons.swap_horiz,

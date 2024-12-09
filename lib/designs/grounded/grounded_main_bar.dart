@@ -191,8 +191,8 @@ class GroundedMainBarState extends State<GroundedMainBar>
                             label: Text(
                                 i18n.cropRotateEditor.bottomNavigationBarText,
                                 style: _bottomTextStyle),
-                            icon: Icon(
-                              icons.cropRotateEditor.bottomNavBar,
+                            icon:icons.cropRotateEditor.bottomNavBar ??  Icon(
+                              Icons.crop,
                               size: _bottomIconSize,
                               color: _foreGroundColor,
                             ),

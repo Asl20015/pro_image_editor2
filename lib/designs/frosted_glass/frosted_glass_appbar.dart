@@ -142,66 +142,49 @@ class _FrostedGlassActionBarState extends State<FrostedGlassActionBar> {
                     children: [
                       if (widget.editor.configs.paintEditorConfigs.enabled)
                         IconButton(
-                          tooltip: widget.editor.configs.i18n.paintEditor
-                              .bottomNavigationBarText,
+                          tooltip: widget.editor.configs.i18n.paintEditor.bottomNavigationBarText,
                           onPressed: widget.editor.openPaintingEditor,
-                          icon: Icon(widget.editor.configs.icons.paintingEditor
-                              .bottomNavBar),
+                          icon: Icon(widget.editor.configs.icons.paintingEditor.bottomNavBar),
                         ),
                       if (widget.editor.configs.textEditorConfigs.enabled)
                         IconButton(
-                          tooltip: widget.editor.configs.i18n.textEditor
-                              .bottomNavigationBarText,
+                          tooltip: widget.editor.configs.i18n.textEditor.bottomNavigationBarText,
                           onPressed: () => widget.editor.openTextEditor(
                             duration: const Duration(milliseconds: 150),
                           ),
-                          icon: Icon(widget
-                              .editor.configs.icons.textEditor.bottomNavBar),
+                          icon: Icon(widget.editor.configs.icons.textEditor.bottomNavBar),
                         ),
                       if (widget.editor.configs.cropRotateEditorConfigs.enabled)
-                        IconButton(
-                          tooltip: widget.editor.configs.i18n.cropRotateEditor
-                              .bottomNavigationBarText,
-                          onPressed: widget.editor.openCropRotateEditor,
-                          icon: Icon(widget.editor.configs.icons
-                              .cropRotateEditor.bottomNavBar),
+                        GestureDetector(
+                          onTap: widget.editor.openCropRotateEditor,
+                          child: widget.editor.configs.icons.cropRotateEditor.bottomNavBar ??
+                              Icon(Icons.crop),
                         ),
                       if (widget.editor.configs.tuneEditorConfigs.enabled)
                         IconButton(
-                          tooltip: widget.editor.configs.i18n.tuneEditor
-                              .bottomNavigationBarText,
-                          onPressed: () =>
-                              widget.editor.openTuneEditor(enableHero: false),
-                          icon: Icon(widget
-                              .editor.configs.icons.tuneEditor.bottomNavBar),
+                          tooltip: widget.editor.configs.i18n.tuneEditor.bottomNavigationBarText,
+                          onPressed: () => widget.editor.openTuneEditor(enableHero: false),
+                          icon: Icon(widget.editor.configs.icons.tuneEditor.bottomNavBar),
                         ),
                       if (widget.editor.configs.filterEditorConfigs.enabled)
                         IconButton(
-                          tooltip: widget.editor.configs.i18n.filterEditor
-                              .bottomNavigationBarText,
+                          tooltip: widget.editor.configs.i18n.filterEditor.bottomNavigationBarText,
                           onPressed: widget.editor.openFilterEditor,
-                          icon: Icon(widget
-                              .editor.configs.icons.filterEditor.bottomNavBar),
+                          icon: Icon(widget.editor.configs.icons.filterEditor.bottomNavBar),
                         ),
                       if (widget.editor.configs.blurEditorConfigs.enabled)
                         IconButton(
-                          tooltip: widget.editor.configs.i18n.blurEditor
-                              .bottomNavigationBarText,
+                          tooltip: widget.editor.configs.i18n.blurEditor.bottomNavigationBarText,
                           onPressed: widget.editor.openBlurEditor,
-                          icon: Icon(widget
-                              .editor.configs.icons.blurEditor.bottomNavBar),
+                          icon: Icon(widget.editor.configs.icons.blurEditor.bottomNavBar),
                         ),
-                      if (widget.editor.configs.stickerEditorConfigs?.enabled ==
-                              true ||
+                      if (widget.editor.configs.stickerEditorConfigs?.enabled == true ||
                           widget.editor.configs.emojiEditorConfigs.enabled)
                         IconButton(
-                          key: const ValueKey(
-                              'whatsapp-open-sticker-editor-btn'),
-                          tooltip: widget.editor.configs.i18n.stickerEditor
-                              .bottomNavigationBarText,
+                          key: const ValueKey('whatsapp-open-sticker-editor-btn'),
+                          tooltip: widget.editor.configs.i18n.stickerEditor.bottomNavigationBarText,
                           onPressed: widget.openStickerEditor,
-                          icon: Icon(widget
-                              .editor.configs.icons.stickerEditor.bottomNavBar),
+                          icon: Icon(widget.editor.configs.icons.stickerEditor.bottomNavBar),
                         ),
                     ],
                   ),
