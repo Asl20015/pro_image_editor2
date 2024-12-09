@@ -107,6 +107,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     this.bottomTextStyle,
     this.assetPath,
     this.networkUrl,
+    this.buttonsHistory,
     required this.bottomNavigationBarHeight,
     this.file,
     this.imageBack,
@@ -150,7 +151,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget? appBarWidget,
+    PreferredSizeWidget Function({
+      required Function() onClose,
+      required Function() onFinish,
+    })? appBarWidget,
+    Widget Function({
+      required Function() onPrev,
+      required Function() onNext,
+    })? buttonsHistory,
     TextStyle? bottomTextStyle,
     double bottomNavigationBarHeight = 56,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
@@ -163,6 +171,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       appBarWidgetCrop: appBarWidgetCrop,
       appBarWidget: appBarWidget,
       configs: configs,
+      buttonsHistory: buttonsHistory,
       callbacks: callbacks,
     );
   }
@@ -190,7 +199,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     String? imageBack,
     double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget? appBarWidget,
+    PreferredSizeWidget Function({
+      required Function() onClose,
+      required Function() onFinish,
+    })? appBarWidget,
+    Widget Function({
+      required Function() onPrev,
+      required Function() onNext,
+    })? buttonsHistory,
   }) {
     return ProImageEditor._(
       key: key,
@@ -202,6 +218,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       imageBack: imageBack,
       bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
+      buttonsHistory: buttonsHistory,
     );
   }
 
@@ -227,7 +244,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     required ProImageEditorCallbacks callbacks,
     double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget? appBarWidget,
+    PreferredSizeWidget Function({
+      required Function() onClose,
+      required Function() onFinish,
+    })? appBarWidget,
+    Widget Function({
+      required Function() onPrev,
+      required Function() onNext,
+    })? buttonsHistory,
   }) {
     return ProImageEditor._(
       key: key,
@@ -236,6 +260,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       appBarWidgetCrop: appBarWidgetCrop,
       appBarWidget: appBarWidget,
       configs: configs,
+      buttonsHistory: buttonsHistory,
       bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
     );
@@ -263,7 +288,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget? appBarWidget,
+    PreferredSizeWidget Function({
+      required Function() onClose,
+      required Function() onFinish,
+    })? appBarWidget,
+    Widget Function({
+      required Function() onPrev,
+      required Function() onNext,
+    })? buttonsHistory,
     double bottomNavigationBarHeight = 56,
   }) {
     return ProImageEditor._(
@@ -272,6 +304,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
       appBarWidget: appBarWidget,
+      buttonsHistory: buttonsHistory,
       configs: configs,
       bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
@@ -301,7 +334,16 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   final TextStyle? bottomTextStyle;
 
   final Widget? appBarWidgetCrop;
-  final PreferredSizeWidget? appBarWidget;
+
+  final PreferredSizeWidget Function({
+    required Function() onClose,
+    required Function() onFinish,
+  })? appBarWidget;
+
+  final Widget Function({
+    required Function() onPrev,
+    required Function() onNext,
+  })? buttonsHistory;
 
   @override
   State<ProImageEditor> createState() => ProImageEditorState();
@@ -2024,12 +2066,10 @@ class ProImageEditorState extends State<ProImageEditor>
         : AppBar(
             foregroundColor: imageEditorTheme.appBarForegroundColor,
             backgroundColor: Colors.transparent,
-            bottom: widget.appBarWidget,
-            //leading: IconButton(
-            //  tooltip: i18n.cancel,
-            //  icon: Icon(icons.closeEditor),
-            //  onPressed: closeEditor,
-            //),
+            bottom: widget.appBarWidget?.call(
+              onClose: closeEditor,
+              onFinish: doneEditing,
+            ),
             //actions: [
             //  IconButton(
             //    key: const ValueKey('MainEditorUndoButton'),
@@ -2234,126 +2274,135 @@ class ProImageEditorState extends State<ProImageEditor>
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              if (cropRotateEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-crop-rotate-editor-btn'),
-                                  label: Text(
-                                    'Cut',
-                                    style: widget.bottomTextStyle ?? bottomTextStyle,
-                                  ),
-                                  icon: icons.cropRotateEditor.bottomNavBar ??
-                                      Icon(
-                                        Icons.crop,
+                          child: Column(
+                            children: [
+                              if (widget.buttonsHistory != null)
+                                widget.buttonsHistory!.call(
+                                  onPrev: redoAction,
+                                  onNext: undoAction,
+                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  if (cropRotateEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-crop-rotate-editor-btn'),
+                                      label: Text(
+                                        'Cut',
+                                        style: widget.bottomTextStyle ?? bottomTextStyle,
+                                      ),
+                                      icon: icons.cropRotateEditor.bottomNavBar ??
+                                          Icon(
+                                            Icons.crop,
+                                            size: bottomIconSize,
+                                            color: Colors.white,
+                                          ),
+                                      onPressed: openCropRotateEditor,
+                                    ),
+                                  if (filterEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-filter-editor-btn'),
+                                      label: Text(
+                                        'Filters',
+                                        style: widget.bottomTextStyle ?? bottomTextStyle,
+                                      ),
+                                      icon: icons.filterEditor.bottomNavBar ??
+                                          Icon(
+                                            Icons.filter,
+                                            size: bottomIconSize,
+                                            color: Colors.white,
+                                          ),
+                                      onPressed: openFilterEditor,
+                                    ),
+                                  if (textEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-text-editor-btn'),
+                                      label: Text(
+                                        'Text',
+                                        style: widget.bottomTextStyle ?? bottomTextStyle,
+                                      ),
+                                      icon: icons.textEditor.bottomNavBar ??
+                                          Icon(
+                                            Icons.text_format,
+                                            size: bottomIconSize,
+                                            color: Colors.white,
+                                          ),
+                                      onPressed: openTextEditor,
+                                    ),
+                                  if (paintEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-painting-editor-btn'),
+                                      label: Text(
+                                        'Paint',
+                                        style: widget.bottomTextStyle ?? bottomTextStyle,
+                                      ),
+                                      icon: icons.paintingEditor.bottomNavBar ??
+                                          Icon(
+                                            Icons.edit,
+                                            size: bottomIconSize,
+                                            color: Colors.white,
+                                          ),
+                                      onPressed: openPaintingEditor,
+                                    ),
+                                  if (tuneEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-tune-editor-btn'),
+                                      label: Text(i18n.tuneEditor.bottomNavigationBarText,
+                                          style: bottomTextStyle),
+                                      icon: Icon(
+                                        icons.tuneEditor.bottomNavBar,
                                         size: bottomIconSize,
                                         color: Colors.white,
                                       ),
-                                  onPressed: openCropRotateEditor,
-                                ),
-                              if (filterEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-filter-editor-btn'),
-                                  label: Text(
-                                    'Filters',
-                                    style: widget.bottomTextStyle ?? bottomTextStyle,
-                                  ),
-                                  icon: icons.filterEditor.bottomNavBar ??
-                                      Icon(
-                                        Icons.filter,
+                                      onPressed: openTuneEditor,
+                                    ),
+                                  if (blurEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-blur-editor-btn'),
+                                      label: Text(i18n.blurEditor.bottomNavigationBarText,
+                                          style: bottomTextStyle),
+                                      icon: Icon(
+                                        icons.blurEditor.bottomNavBar,
                                         size: bottomIconSize,
                                         color: Colors.white,
                                       ),
-                                  onPressed: openFilterEditor,
-                                ),
-                              if (textEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-text-editor-btn'),
-                                  label: Text(
-                                    'Text',
-                                    style: widget.bottomTextStyle ?? bottomTextStyle,
-                                  ),
-                                  icon: icons.textEditor.bottomNavBar ??
-                                      Icon(
-                                        Icons.text_format,
+                                      onPressed: openBlurEditor,
+                                    ),
+                                  if (emojiEditorConfigs.enabled)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-emoji-editor-btn'),
+                                      label: Text(i18n.emojiEditor.bottomNavigationBarText,
+                                          style: bottomTextStyle),
+                                      icon: Icon(
+                                        icons.emojiEditor.bottomNavBar,
                                         size: bottomIconSize,
                                         color: Colors.white,
                                       ),
-                                  onPressed: openTextEditor,
-                                ),
-                              if (paintEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-painting-editor-btn'),
-                                  label: Text(
-                                    'Paint',
-                                    style: widget.bottomTextStyle ?? bottomTextStyle,
-                                  ),
-                                  icon: icons.paintingEditor.bottomNavBar ??
-                                      Icon(
-                                        Icons.edit,
+                                      onPressed: openEmojiEditor,
+                                    ),
+                                  if (stickerEditorConfigs?.enabled == true)
+                                    FlatIconTextButton(
+                                      bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
+                                      key: const ValueKey('open-sticker-editor-btn'),
+                                      label: Text(i18n.stickerEditor.bottomNavigationBarText,
+                                          style: bottomTextStyle),
+                                      icon: Icon(
+                                        icons.stickerEditor.bottomNavBar,
                                         size: bottomIconSize,
                                         color: Colors.white,
                                       ),
-                                  onPressed: openPaintingEditor,
-                                ),
-                              if (tuneEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-tune-editor-btn'),
-                                  label: Text(i18n.tuneEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.tuneEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: openTuneEditor,
-                                ),
-                              if (blurEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-blur-editor-btn'),
-                                  label: Text(i18n.blurEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.blurEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: openBlurEditor,
-                                ),
-                              if (emojiEditorConfigs.enabled)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-emoji-editor-btn'),
-                                  label: Text(i18n.emojiEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.emojiEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: openEmojiEditor,
-                                ),
-                              if (stickerEditorConfigs?.enabled == true)
-                                FlatIconTextButton(
-                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
-                                  key: const ValueKey('open-sticker-editor-btn'),
-                                  label: Text(i18n.stickerEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.stickerEditor.bottomNavBar,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: openStickerEditor,
-                                ),
+                                      onPressed: openStickerEditor,
+                                    ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
