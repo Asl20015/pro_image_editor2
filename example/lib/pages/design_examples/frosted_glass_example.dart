@@ -77,7 +77,7 @@ class _FrostedGlassExampleState extends State<FrostedGlassExample>
                   Theme.of(context).iconTheme.copyWith(color: Colors.white)),
           icons: const ImageEditorIcons(
             paintingEditor: IconsPaintingEditor(
-              bottomNavBar: Icons.edit,
+              bottomNavBar: Icon(Icons.edit),
             ),
           ),
           imageEditorTheme: ImageEditorTheme(

@@ -123,7 +123,7 @@ class _WhatsAppAppBarState extends State<WhatsAppAppBar> {
                     IconButton(
                       tooltip: widget.configs.i18n.paintEditor.bottomNavigationBarText,
                       onPressed: widget.onTapPaintEditor,
-                      icon: Icon(widget.configs.icons.paintingEditor.bottomNavBar),
+                      icon: Icon(Icons.edit),
                       style: whatsAppButtonStyle,
                     ),
                   ],

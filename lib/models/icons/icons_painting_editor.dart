@@ -42,7 +42,7 @@ class IconsPaintingEditor {
     this.moveAndZoom = Icons.pinch_outlined,
     this.changeOpacity = Icons.opacity_outlined,
     this.eraser = Icons.delete_forever_outlined,
-    this.bottomNavBar = Icons.edit_outlined,
+    this.bottomNavBar,
     this.lineWeight = Icons.line_weight_rounded,
     this.freeStyle = Icons.edit,
     this.arrow = Icons.arrow_right_alt_outlined,
@@ -55,7 +55,7 @@ class IconsPaintingEditor {
   });
 
   /// The icon to be displayed in the bottom navigation bar.
-  final IconData bottomNavBar;
+  final Widget? bottomNavBar;
 
   /// The icon for adjusting line weight.
   final IconData lineWeight;
@@ -110,7 +110,7 @@ class IconsPaintingEditor {
     IconData? moveAndZoom,
     IconData? changeOpacity,
     IconData? eraser,
-    IconData? bottomNavBar,
+    Widget? bottomNavBar,
     IconData? lineWeight,
     IconData? freeStyle,
     IconData? arrow,

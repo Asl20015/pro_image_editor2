@@ -2229,6 +2229,7 @@ class ProImageEditorState extends State<ProImageEditor>
                             children: <Widget>[
                               if (cropRotateEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-crop-rotate-editor-btn'),
                                   label: Text(
                                     'Cut',
@@ -2244,6 +2245,7 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (filterEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-filter-editor-btn'),
                                   label: Text(
                                     'Filters',
@@ -2259,6 +2261,7 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (textEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-text-editor-btn'),
                                   label: Text(
                                     'Text',
@@ -2274,11 +2277,14 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (paintEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-painting-editor-btn'),
-                                  label: Text(i18n.paintEditor.bottomNavigationBarText,
-                                      style: bottomTextStyle),
-                                  icon: Icon(
-                                    icons.paintingEditor.bottomNavBar,
+                                  label: Text(
+                                    'Paint',
+                                    style: widget.bottomTextStyle ?? bottomTextStyle,
+                                  ),
+                                  icon: icons.paintingEditor.bottomNavBar ?? Icon(
+                                    Icons.edit,
                                     size: bottomIconSize,
                                     color: Colors.white,
                                   ),
@@ -2286,6 +2292,7 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (tuneEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-tune-editor-btn'),
                                   label: Text(i18n.tuneEditor.bottomNavigationBarText,
                                       style: bottomTextStyle),
@@ -2298,6 +2305,7 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (blurEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-blur-editor-btn'),
                                   label: Text(i18n.blurEditor.bottomNavigationBarText,
                                       style: bottomTextStyle),
@@ -2310,6 +2318,7 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (emojiEditorConfigs.enabled)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-emoji-editor-btn'),
                                   label: Text(i18n.emojiEditor.bottomNavigationBarText,
                                       style: bottomTextStyle),
@@ -2322,6 +2331,7 @@ class ProImageEditorState extends State<ProImageEditor>
                                 ),
                               if (stickerEditorConfigs?.enabled == true)
                                 FlatIconTextButton(
+                                  bottomNavigationBarHeight: widget.bottomNavigationBarHeight,
                                   key: const ValueKey('open-sticker-editor-btn'),
                                   label: Text(i18n.stickerEditor.bottomNavigationBarText,
                                       style: bottomTextStyle),

@@ -262,7 +262,7 @@ class _HighlyConfigurableExampleState extends State<HighlyConfigurableExample>
         ),
         icons: const ImageEditorIcons(
           paintingEditor: IconsPaintingEditor(
-            bottomNavBar: Icons.palette,
+            bottomNavBar: Icon(Icons.edit),
             lineWeight: Icons.line_weight_rounded,
             freeStyle: Icons.roundabout_left,
             arrow: Icons.arrow_downward_rounded,

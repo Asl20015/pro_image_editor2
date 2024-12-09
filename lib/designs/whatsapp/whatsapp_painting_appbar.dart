@@ -93,7 +93,7 @@ class _WhatsAppPaintAppBarState extends State<WhatsAppPaintAppBar> {
                 tooltip:
                     widget.configs.i18n.paintEditor.bottomNavigationBarText,
                 onPressed: () {},
-                icon: Icon(widget.configs.icons.paintingEditor.bottomNavBar),
+                icon: Icon(Icons.edit),
                 style: whatsAppButtonStyle.copyWith(
                   backgroundColor: WidgetStateProperty.all(widget.activeColor),
                 ),

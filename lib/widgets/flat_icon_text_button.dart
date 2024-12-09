@@ -13,13 +13,13 @@ class FlatIconTextButton extends TextButton {
     super.clipBehavior,
     super.focusNode,
     double spacing = 5.0,
+    double bottomNavigationBarHeight = 56,
     required Widget icon,
     required Widget label,
   }) : super(
           style: TextButton.styleFrom(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-            maximumSize:
-                const Size(double.infinity, kBottomNavigationBarHeight),
+            maximumSize: Size(double.infinity, bottomNavigationBarHeight),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

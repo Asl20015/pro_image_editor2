@@ -167,7 +167,7 @@ class GroundedMainBarState extends State<GroundedMainBar>
                                 i18n.paintEditor.bottomNavigationBarText,
                                 style: _bottomTextStyle),
                             icon: Icon(
-                              icons.paintingEditor.bottomNavBar,
+                              Icons.edit,
                               size: _bottomIconSize,
                               color: _foreGroundColor,
                             ),

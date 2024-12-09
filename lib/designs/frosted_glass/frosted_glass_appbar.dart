@@ -144,7 +144,7 @@ class _FrostedGlassActionBarState extends State<FrostedGlassActionBar> {
                         IconButton(
                           tooltip: widget.editor.configs.i18n.paintEditor.bottomNavigationBarText,
                           onPressed: widget.editor.openPaintingEditor,
-                          icon: Icon(widget.editor.configs.icons.paintingEditor.bottomNavBar),
+                          icon: Icon(Icons.edit),
                         ),
                       if (widget.editor.configs.textEditorConfigs.enabled)
                         IconButton(
