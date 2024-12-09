@@ -102,6 +102,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     super.key,
     required this.callbacks,
     this.appBarWidgetCrop,
+    this.appBarWidget,
     this.byteArray,
     this.bottomTextStyle,
     this.assetPath,
@@ -149,6 +150,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
+    PreferredSizeWidget? appBarWidget,
     TextStyle? bottomTextStyle,
     double bottomNavigationBarHeight = 56,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
@@ -159,6 +161,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       bottomTextStyle: bottomTextStyle,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
+      appBarWidget: appBarWidget,
       configs: configs,
       callbacks: callbacks,
     );
@@ -187,11 +190,13 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     String? imageBack,
     double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
+    PreferredSizeWidget? appBarWidget,
   }) {
     return ProImageEditor._(
       key: key,
       file: file,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
+      appBarWidget: appBarWidget,
       configs: configs,
       appBarWidgetCrop: appBarWidgetCrop,
       imageBack: imageBack,
@@ -222,12 +227,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     required ProImageEditorCallbacks callbacks,
     double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
+    PreferredSizeWidget? appBarWidget,
   }) {
     return ProImageEditor._(
       key: key,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       assetPath: assetPath,
       appBarWidgetCrop: appBarWidgetCrop,
+      appBarWidget: appBarWidget,
       configs: configs,
       bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
@@ -256,6 +263,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
+    PreferredSizeWidget? appBarWidget,
     double bottomNavigationBarHeight = 56,
   }) {
     return ProImageEditor._(
@@ -263,6 +271,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       networkUrl: networkUrl,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
+      appBarWidget: appBarWidget,
       configs: configs,
       bottomTextStyle: bottomTextStyle,
       callbacks: callbacks,
@@ -292,6 +301,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   final TextStyle? bottomTextStyle;
 
   final Widget? appBarWidgetCrop;
+  final PreferredSizeWidget? appBarWidget;
 
   @override
   State<ProImageEditor> createState() => ProImageEditorState();
@@ -2014,50 +2024,51 @@ class ProImageEditorState extends State<ProImageEditor>
         : AppBar(
             foregroundColor: imageEditorTheme.appBarForegroundColor,
             backgroundColor: Colors.transparent,
-            leading: IconButton(
-              tooltip: i18n.cancel,
-              icon: Icon(icons.closeEditor),
-              onPressed: closeEditor,
-            ),
-            actions: [
-              IconButton(
-                key: const ValueKey('MainEditorUndoButton'),
-                tooltip: i18n.undo,
-                icon: Icon(
-                  icons.undoAction,
-                  color: stateManager.position > 0
-                      ? imageEditorTheme.appBarForegroundColor
-                      : imageEditorTheme.appBarForegroundColor.withAlpha(80),
-                ),
-                onPressed: undoAction,
-              ),
-              IconButton(
-                key: const ValueKey('MainEditorRedoButton'),
-                tooltip: i18n.redo,
-                icon: Icon(
-                  icons.redoAction,
-                  color: stateManager.position < stateHistory.length - 1
-                      ? imageEditorTheme.appBarForegroundColor
-                      : imageEditorTheme.appBarForegroundColor.withAlpha(80),
-                ),
-                onPressed: redoAction,
-              ),
-              !_initialized
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: SizedBox.square(
-                        dimension: 24,
-                        child: PlatformCircularProgressIndicator(configs: configs),
-                      ),
-                    )
-                  : IconButton(
-                      key: const ValueKey('MainEditorDoneButton'),
-                      tooltip: i18n.done,
-                      icon: Icon(icons.doneIcon),
-                      iconSize: 28,
-                      onPressed: doneEditing,
-                    ),
-            ],
+            bottom: widget.appBarWidget,
+            //leading: IconButton(
+            //  tooltip: i18n.cancel,
+            //  icon: Icon(icons.closeEditor),
+            //  onPressed: closeEditor,
+            //),
+            //actions: [
+            //  IconButton(
+            //    key: const ValueKey('MainEditorUndoButton'),
+            //    tooltip: i18n.undo,
+            //    icon: Icon(
+            //      icons.undoAction,
+            //      color: stateManager.position > 0
+            //          ? imageEditorTheme.appBarForegroundColor
+            //          : imageEditorTheme.appBarForegroundColor.withAlpha(80),
+            //    ),
+            //    onPressed: undoAction,
+            //  ),
+            //  IconButton(
+            //    key: const ValueKey('MainEditorRedoButton'),
+            //    tooltip: i18n.redo,
+            //    icon: Icon(
+            //      icons.redoAction,
+            //      color: stateManager.position < stateHistory.length - 1
+            //          ? imageEditorTheme.appBarForegroundColor
+            //          : imageEditorTheme.appBarForegroundColor.withAlpha(80),
+            //    ),
+            //    onPressed: redoAction,
+            //  ),
+            //  !_initialized
+            //      ? Padding(
+            //          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            //          child: SizedBox.square(
+            //            dimension: 24,
+            //            child: PlatformCircularProgressIndicator(configs: configs),
+            //          ),
+            //        )
+            //      : IconButton(
+            //          key: const ValueKey('MainEditorDoneButton'),
+            //          tooltip: i18n.done,
+            //          icon: Icon(icons.doneIcon),
+            //          iconSize: 28,
+            //          onPressed: doneEditing,
+            //        ),
+            //],
           );
   }
 
@@ -2283,11 +2294,12 @@ class ProImageEditorState extends State<ProImageEditor>
                                     'Paint',
                                     style: widget.bottomTextStyle ?? bottomTextStyle,
                                   ),
-                                  icon: icons.paintingEditor.bottomNavBar ?? Icon(
-                                    Icons.edit,
-                                    size: bottomIconSize,
-                                    color: Colors.white,
-                                  ),
+                                  icon: icons.paintingEditor.bottomNavBar ??
+                                      Icon(
+                                        Icons.edit,
+                                        size: bottomIconSize,
+                                        color: Colors.white,
+                                      ),
                                   onPressed: openPaintingEditor,
                                 ),
                               if (tuneEditorConfigs.enabled)
