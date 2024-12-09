@@ -151,14 +151,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Key? key,
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget Function({
-      required Function() onClose,
-      required Function() onFinish,
-    })? appBarWidget,
-    Widget Function({
-      required Function() onPrev,
-      required Function() onNext,
-    })? buttonsHistory,
+    PreferredSizeWidget Function(
+      Function() onClose,
+      Function() onFinish,
+    )? appBarWidget,
+    Widget Function(
+      Function() onPrev,
+      Function() onNext,
+    )? buttonsHistory,
     TextStyle? bottomTextStyle,
     double bottomNavigationBarHeight = 56,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
@@ -199,14 +199,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     String? imageBack,
     double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget Function({
-      required Function() onClose,
-      required Function() onFinish,
-    })? appBarWidget,
-    Widget Function({
-      required Function() onPrev,
-      required Function() onNext,
-    })? buttonsHistory,
+    PreferredSizeWidget Function(
+      Function() onClose,
+      Function() onFinish,
+    )? appBarWidget,
+    Widget Function(
+      Function() onPrev,
+      Function() onNext,
+    )? buttonsHistory,
   }) {
     return ProImageEditor._(
       key: key,
@@ -244,14 +244,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     required ProImageEditorCallbacks callbacks,
     double bottomNavigationBarHeight = 56,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget Function({
-      required Function() onClose,
-      required Function() onFinish,
-    })? appBarWidget,
-    Widget Function({
-      required Function() onPrev,
-      required Function() onNext,
-    })? buttonsHistory,
+    PreferredSizeWidget Function(
+      Function() onClose,
+      Function() onFinish,
+    )? appBarWidget,
+    Widget Function(
+      Function() onPrev,
+      Function() onNext,
+    )? buttonsHistory,
   }) {
     return ProImageEditor._(
       key: key,
@@ -288,14 +288,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     Widget? appBarWidgetCrop,
-    PreferredSizeWidget Function({
-      required Function() onClose,
-      required Function() onFinish,
-    })? appBarWidget,
-    Widget Function({
-      required Function() onPrev,
-      required Function() onNext,
-    })? buttonsHistory,
+    PreferredSizeWidget Function(
+      Function() onClose,
+      Function() onFinish,
+    )? appBarWidget,
+    Widget Function(
+      Function() onPrev,
+      Function() onNext,
+    )? buttonsHistory,
     double bottomNavigationBarHeight = 56,
   }) {
     return ProImageEditor._(
@@ -335,15 +335,15 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
 
   final Widget? appBarWidgetCrop;
 
-  final PreferredSizeWidget Function({
-    required Function() onClose,
-    required Function() onFinish,
-  })? appBarWidget;
+  final PreferredSizeWidget Function(
+    Function() onClose,
+    Function() onFinish,
+  )? appBarWidget;
 
-  final Widget Function({
-    required Function() onPrev,
-    required Function() onNext,
-  })? buttonsHistory;
+  final Widget Function(
+    Function() onPrev,
+    Function() onNext,
+  )? buttonsHistory;
 
   @override
   State<ProImageEditor> createState() => ProImageEditorState();
@@ -2067,8 +2067,8 @@ class ProImageEditorState extends State<ProImageEditor>
             foregroundColor: imageEditorTheme.appBarForegroundColor,
             backgroundColor: Colors.transparent,
             bottom: widget.appBarWidget?.call(
-              onClose: closeEditor,
-              onFinish: doneEditing,
+              closeEditor,
+              doneEditing,
             ),
             //actions: [
             //  IconButton(
@@ -2278,8 +2278,8 @@ class ProImageEditorState extends State<ProImageEditor>
                             children: [
                               if (widget.buttonsHistory != null)
                                 widget.buttonsHistory!.call(
-                                  onPrev: redoAction,
-                                  onNext: undoAction,
+                                  redoAction,
+                                  undoAction,
                                 ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
