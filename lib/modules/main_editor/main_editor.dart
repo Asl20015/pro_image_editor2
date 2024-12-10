@@ -158,6 +158,8 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Widget Function(
       Function() onPrev,
       Function() onNext,
+      bool,
+      bool,
     )? buttonsHistory,
     TextStyle? bottomTextStyle,
     double bottomNavigationBarHeight = 56,
@@ -206,6 +208,8 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Widget Function(
       Function() onPrev,
       Function() onNext,
+      bool,
+      bool,
     )? buttonsHistory,
   }) {
     return ProImageEditor._(
@@ -251,6 +255,8 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Widget Function(
       Function() onPrev,
       Function() onNext,
+      bool,
+      bool,
     )? buttonsHistory,
   }) {
     return ProImageEditor._(
@@ -295,6 +301,8 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     Widget Function(
       Function() onPrev,
       Function() onNext,
+      bool,
+      bool,
     )? buttonsHistory,
     double bottomNavigationBarHeight = 56,
   }) {
@@ -343,6 +351,8 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   final Widget Function(
     Function() onPrev,
     Function() onNext,
+    bool,
+    bool,
   )? buttonsHistory;
 
   @override
@@ -2275,11 +2285,14 @@ class ProImageEditorState extends State<ProImageEditor>
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12.0),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               if (widget.buttonsHistory != null)
                                 widget.buttonsHistory!.call(
                                   redoAction,
                                   undoAction,
+                                  stateManager.position < stateHistory.length - 1,
+                                  stateManager.position > 0,
                                 ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
