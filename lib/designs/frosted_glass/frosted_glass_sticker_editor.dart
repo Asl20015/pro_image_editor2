@@ -151,10 +151,7 @@ class _FrostedGlassStickerPageState extends State<FrostedGlassStickerPage> {
                 backgroundColor: Colors.black38,
               ),
               onPressed: null,
-              icon: Icon(
-                widget.configs.icons.stickerEditor.bottomNavBar,
-                color: Colors.white,
-              ),
+              icon: Icon(Icons.sticky_note_2),
             ),
           ],
         ),

@@ -107,7 +107,7 @@ class _WhatsAppAppBarState extends State<WhatsAppAppBar> {
                       key: const ValueKey('whatsapp-open-sticker-editor-btn'),
                       tooltip: widget.configs.i18n.stickerEditor.bottomNavigationBarText,
                       onPressed: widget.onTapStickerEditor,
-                      icon: Icon(widget.configs.icons.stickerEditor.bottomNavBar),
+                      icon: Icon(Icons.sticky_note_2),
                       style: whatsAppButtonStyle,
                     ),
                   ],

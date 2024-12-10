@@ -21,11 +21,11 @@ class IconsStickerEditor {
   /// )
   /// ```
   const IconsStickerEditor({
-    this.bottomNavBar = ProImageEditorIcons.stickers,
+    this.bottomNavBar,
   });
 
   /// The icon to be displayed in the bottom navigation bar.
-  final IconData bottomNavBar;
+  final Widget? bottomNavBar;
 
   /// Creates a copy of this `IconsStickerEditor` object with the given fields
   /// replaced with new values.
@@ -34,7 +34,7 @@ class IconsStickerEditor {
   /// [IconsStickerEditor] with some properties updated while keeping the
   /// others unchanged.
   IconsStickerEditor copyWith({
-    IconData? bottomNavBar,
+    Widget? bottomNavBar,
   }) {
     return IconsStickerEditor(
       bottomNavBar: bottomNavBar ?? this.bottomNavBar,

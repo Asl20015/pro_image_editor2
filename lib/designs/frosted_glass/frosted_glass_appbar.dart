@@ -186,7 +186,7 @@ class _FrostedGlassActionBarState extends State<FrostedGlassActionBar> {
                           key: const ValueKey('whatsapp-open-sticker-editor-btn'),
                           tooltip: widget.editor.configs.i18n.stickerEditor.bottomNavigationBarText,
                           onPressed: widget.openStickerEditor,
-                          icon: Icon(widget.editor.configs.icons.stickerEditor.bottomNavBar),
+                          icon: Icon(Icons.sticky_note_2),
                         ),
                     ],
                   ),

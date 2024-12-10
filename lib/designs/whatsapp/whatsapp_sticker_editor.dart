@@ -141,10 +141,7 @@ class _WhatsAppStickerPageState extends State<WhatsAppStickerPage> {
                 backgroundColor: Colors.black38,
               ),
               onPressed: () {},
-              icon: Icon(
-                widget.configs.icons.stickerEditor.bottomNavBar,
-                color: Colors.white,
-              ),
+              icon: Icon(Icons.sticky_note_2),
             ),
           ],
         ),
@@ -294,10 +291,7 @@ class _WhatsAppStickerPageState extends State<WhatsAppStickerPage> {
                         _buildCupertinoSegments(),
                       IconButton(
                         onPressed: null,
-                        icon: Icon(
-                          widget.configs.icons.stickerEditor.bottomNavBar,
-                          color: Colors.white,
-                        ),
+                        icon: Icon(Icons.sticky_note_2),
                       ),
                     ],
                   ),
@@ -329,10 +323,7 @@ class _WhatsAppStickerPageState extends State<WhatsAppStickerPage> {
         ),
         WhatsAppStickerMode.sticker: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Icon(
-            widget.configs.icons.stickerEditor.bottomNavBar,
-            color: Colors.white,
-          ),
+          child:Icon(Icons.sticky_note_2),
         ),
       },
     );

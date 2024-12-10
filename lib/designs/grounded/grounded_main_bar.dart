@@ -254,11 +254,7 @@ class GroundedMainBarState extends State<GroundedMainBar>
                             label: Text(
                                 i18n.stickerEditor.bottomNavigationBarText,
                                 style: _bottomTextStyle),
-                            icon: Icon(
-                              icons.stickerEditor.bottomNavBar,
-                              size: _bottomIconSize,
-                              color: _foreGroundColor,
-                            ),
+                            icon: Icon(Icons.sticky_note_2),
                             onPressed: _openStickerEditor,
                           ),
                       ],

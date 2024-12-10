@@ -302,7 +302,7 @@ class _HighlyConfigurableExampleState extends State<HighlyConfigurableExample>
             bottomNavBar: Icons.face_4_outlined,
           ),
           stickerEditor: IconsStickerEditor(
-            bottomNavBar: Icons.layers_outlined,
+            bottomNavBar: Icon(Icons.sticky_note_2),
           ),
           closeEditor: Icons.clear,
           doneIcon: Icons.save_outlined,
