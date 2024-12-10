@@ -77,7 +77,6 @@ class _GroundedStickerEditorState extends State<GroundedStickerEditor> {
               Expanded(
                 child: StickerEditor(
                   configs: widget.configs,
-                  scrollController: _stickerScrollController,
                 ),
               ),
               Container(

@@ -102,7 +102,6 @@ class _FrostedGlassStickerPageState extends State<FrostedGlassStickerPage> {
                             FrostedGlassStickerMode.sticker,
                         child: StickerEditor(
                           configs: widget.configs,
-                          scrollController: _stickerScrollController,
                         ),
                       ),
                   ],

@@ -18,16 +18,12 @@ class StickerEditor extends StatefulWidget with SimpleConfigsAccess {
     super.key,
     required this.configs,
     this.callbacks = const ProImageEditorCallbacks(),
-    required this.scrollController,
   });
   @override
   final ProImageEditorConfigs configs;
 
   @override
   final ProImageEditorCallbacks callbacks;
-
-  /// Controller for managing scroll actions.
-  final ScrollController scrollController;
 
   @override
   createState() => StickerEditorState();
@@ -53,7 +49,7 @@ class StickerEditorState extends State<StickerEditor>
   @override
   Widget build(BuildContext context) {
     return widget.configs.stickerEditorConfigs!
-        .buildStickers(setLayer, widget.scrollController);
+        .buildStickers(setLayer);
   }
 
   /// Sets the current layer with a sticker and closes the navigation.

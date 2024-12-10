@@ -88,4 +88,4 @@ class StickerEditorConfigs {
 /// editor, allowing customization of how stickers are displayed and
 /// manipulated within the user interface.
 typedef BuildStickers = Widget Function(
-    Function(Widget) setLayer, ScrollController scrollController);
+    Function(Widget) setLayer);

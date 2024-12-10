@@ -139,8 +139,8 @@ class _FrostedGlassExampleState extends State<FrostedGlassExample>
           ),
           stickerEditorConfigs: StickerEditorConfigs(
             enabled: true,
-            buildStickers: (setLayer, scrollController) => DemoBuildStickers(
-                setLayer: setLayer, scrollController: scrollController),
+            buildStickers: (setLayer) => DemoBuildStickers(
+                setLayer: setLayer, scrollController: ScrollController()),
           ),
           customWidgets: ImageEditorCustomWidgets(
             loadingDialog: (message, configs) => FrostedGlassLoadingDialog(

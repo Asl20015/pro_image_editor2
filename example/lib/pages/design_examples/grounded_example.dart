@@ -159,10 +159,10 @@ class _GroundedDesignExampleState extends State<GroundedDesignExample>
           ),
           stickerEditorConfigs: StickerEditorConfigs(
             enabled: true,
-            buildStickers: (setLayer, scrollController) => DemoBuildStickers(
+            buildStickers: (setLayer) => DemoBuildStickers(
                 categoryColor: const Color(0xFF161616),
                 setLayer: setLayer,
-                scrollController: scrollController),
+                scrollController: ScrollController()),
           ),
           customWidgets: ImageEditorCustomWidgets(
             loadingDialog: (message, configs) => FrostedGlassLoadingDialog(

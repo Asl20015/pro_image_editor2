@@ -1574,27 +1574,14 @@ class ProImageEditorState extends State<ProImageEditor>
     var sheetTheme = imageEditorTheme.stickerEditor.themeDraggableSheet;
     StickerLayerData? layer = await showModalBottomSheet(
         context: context,
-        backgroundColor: imageEditorTheme.stickerEditor.bottomSheetBackgroundColor,
+        backgroundColor: Colors.transparent,
         constraints: effectiveBoxConstraints,
         showDragHandle: imageEditorTheme.stickerEditor.showDragHandle,
         isScrollControlled: true,
         useSafeArea: true,
         builder: (_) {
-          return DraggableScrollableSheet(
-            expand: sheetTheme.expand,
-            initialChildSize: sheetTheme.initialChildSize,
-            maxChildSize: sheetTheme.maxChildSize,
-            minChildSize: sheetTheme.minChildSize,
-            shouldCloseOnMinExtent: sheetTheme.shouldCloseOnMinExtent,
-            snap: sheetTheme.snap,
-            snapAnimationDuration: sheetTheme.snapAnimationDuration,
-            snapSizes: sheetTheme.snapSizes,
-            builder: (_, controller) {
-              return StickerEditor(
-                configs: configs,
-                scrollController: controller,
-              );
-            },
+          return StickerEditor(
+            configs: configs,
           );
         });
     ServicesBinding.instance.keyboard.addHandler(_onKeyEvent);

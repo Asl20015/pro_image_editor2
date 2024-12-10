@@ -92,7 +92,6 @@ class _WhatsAppStickerPageState extends State<WhatsAppStickerPage> {
                             WhatsAppStickerMode.sticker,
                         child: StickerEditor(
                           configs: widget.configs,
-                          scrollController: _stickerScrollController,
                         ),
                       ),
                   ],

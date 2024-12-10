@@ -71,7 +71,7 @@ class _StickersExampleState extends State<StickersExample>
         blurEditorConfigs: const BlurEditorConfigs(enabled: false),
         stickerEditorConfigs: StickerEditorConfigs(
           enabled: true,
-          buildStickers: (setLayer, scrollController) {
+          buildStickers: (setLayer) {
             return ClipRRect(
               borderRadius:
                   const BorderRadius.vertical(top: Radius.circular(20)),
@@ -82,7 +82,7 @@ class _StickersExampleState extends State<StickersExample>
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
-                controller: scrollController,
+                controller: ScrollController(),
                 itemCount: 21,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
