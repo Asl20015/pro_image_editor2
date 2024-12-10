@@ -52,10 +52,8 @@ class StickerEditorState extends State<StickerEditor>
 
   @override
   Widget build(BuildContext context) {
-    return ExtendedPopScope(
-      child: widget.configs.stickerEditorConfigs!
-          .buildStickers(setLayer, widget.scrollController),
-    );
+    return widget.configs.stickerEditorConfigs!
+        .buildStickers(setLayer, widget.scrollController);
   }
 
   /// Sets the current layer with a sticker and closes the navigation.
