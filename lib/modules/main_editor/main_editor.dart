@@ -109,6 +109,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     this.networkUrl,
     this.buttonsHistory,
     required this.bottomNavigationBarHeight,
+    required this.bottomNavigationBarButtonsHeight,
     this.file,
     this.imageBack,
     this.configs = const ProImageEditorConfigs(),
@@ -163,12 +164,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     )? buttonsHistory,
     TextStyle? bottomTextStyle,
     double bottomNavigationBarHeight = 56,
+    double bottomNavigationBarButtonsHeight = 56,
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
   }) {
     return ProImageEditor._(
       key: key,
       byteArray: byteArray,
       bottomTextStyle: bottomTextStyle,
+      bottomNavigationBarButtonsHeight: bottomNavigationBarButtonsHeight,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
       appBarWidget: appBarWidget,
@@ -200,6 +203,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     required ProImageEditorCallbacks callbacks,
     String? imageBack,
     double bottomNavigationBarHeight = 56,
+    double bottomNavigationBarButtonsHeight = 56,
     Widget? appBarWidgetCrop,
     PreferredSizeWidget Function(
       Function() onClose,
@@ -217,6 +221,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       file: file,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidget: appBarWidget,
+      bottomNavigationBarButtonsHeight: bottomNavigationBarButtonsHeight,
       configs: configs,
       appBarWidgetCrop: appBarWidgetCrop,
       imageBack: imageBack,
@@ -247,6 +252,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
     ProImageEditorConfigs configs = const ProImageEditorConfigs(),
     required ProImageEditorCallbacks callbacks,
     double bottomNavigationBarHeight = 56,
+    double bottomNavigationBarButtonsHeight = 56,
     Widget? appBarWidgetCrop,
     PreferredSizeWidget Function(
       Function() onClose,
@@ -265,6 +271,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       assetPath: assetPath,
       appBarWidgetCrop: appBarWidgetCrop,
       appBarWidget: appBarWidget,
+      bottomNavigationBarButtonsHeight: bottomNavigationBarButtonsHeight,
       configs: configs,
       buttonsHistory: buttonsHistory,
       bottomTextStyle: bottomTextStyle,
@@ -305,12 +312,14 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
       bool,
     )? buttonsHistory,
     double bottomNavigationBarHeight = 56,
+    double bottomNavigationBarButtonsHeight = 56,
   }) {
     return ProImageEditor._(
       key: key,
       networkUrl: networkUrl,
       bottomNavigationBarHeight: bottomNavigationBarHeight,
       appBarWidgetCrop: appBarWidgetCrop,
+      bottomNavigationBarButtonsHeight: bottomNavigationBarButtonsHeight,
       appBarWidget: appBarWidget,
       buttonsHistory: buttonsHistory,
       configs: configs,
@@ -339,6 +348,7 @@ class ProImageEditor extends StatefulWidget with SimpleConfigsAccess, SimpleCall
   final String? imageBack;
 
   final double bottomNavigationBarHeight;
+  final double bottomNavigationBarButtonsHeight;
   final TextStyle? bottomTextStyle;
 
   final Widget? appBarWidgetCrop;
@@ -2267,6 +2277,7 @@ class ProImageEditorState extends State<ProImageEditor>
                 scrollbarOrientation: ScrollbarOrientation.top,
                 thickness: isDesktop ? null : 0,
                 child: BottomAppBar(
+                  height: widget.bottomNavigationBarHeight,
                   color: Colors.transparent,
                   padding: EdgeInsets.zero,
                   child: Column(
@@ -2280,7 +2291,7 @@ class ProImageEditorState extends State<ProImageEditor>
                           stateManager.position > 0,
                         ),
                       SizedBox(
-                        height: widget.bottomNavigationBarHeight,
+                        height: widget.bottomNavigationBarButtonsHeight,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
                           children: <Widget>[
